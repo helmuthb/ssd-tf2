@@ -57,7 +57,7 @@ if __name__ == '__main__':
     os.makedirs(args.checkpoint_dir, exist_ok=True)
 
     with open('./config.yml') as f:
-        cfg = yaml.load(f)
+        cfg = yaml.safe_load(f)
 
     try:
         config = cfg[args.arch.upper()]
@@ -139,3 +139,6 @@ if __name__ == '__main__':
         if (epoch + 1) % 10 == 0:
             ssd.save_weights(
                 os.path.join(args.checkpoint_dir, 'ssd_epoch_{}.h5'.format(epoch + 1)))
+
+    ssd.save_weights(
+        os.path.join(args.checkpoint_dir, 'ssd_epoch_{}.h5'.format(args.num_epochs)))

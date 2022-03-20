@@ -20,8 +20,8 @@ parser.add_argument('--data-dir', default='../dataset')
 parser.add_argument('--data-year', default='2007')
 parser.add_argument('--arch', default='ssd300')
 parser.add_argument('--num-examples', default=-1, type=int)
-parser.add_argument('--pretrained-type', default='specified')
-parser.add_argument('--checkpoint-dir', default='')
+parser.add_argument('--pretrained-type', default='latest')
+parser.add_argument('--checkpoint-dir', default='checkpoints')
 parser.add_argument('--checkpoint-path', default='')
 parser.add_argument('--gpu-id', default='0')
 
@@ -79,7 +79,7 @@ def predict(imgs, default_boxes):
 
 if __name__ == '__main__':
     with open('./config.yml') as f:
-        cfg = yaml.load(f)
+        cfg = yaml.safe_load(f)
 
     try:
         config = cfg[args.arch.upper()]
